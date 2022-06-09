@@ -8,8 +8,16 @@
 		var result = await response.json();
 		return result;
 	}
+
+	const db = async () => {
+		var response = await fetch('https://blogbe.suphakit.net/content');
+		var result = await response.json();
+		return result;
+	}
 	
 	let setBG = bgCall();
+	let setDB = db();
+	
 </script>
 
 <svelte:head>
@@ -45,7 +53,83 @@
 	</div>
 
 	<div class="content">
-		
+		<h1>
+			Blog Content :
+		</h1>
+
+		{#await setDB}
+			Still loading :D
+		{:then callDB} 
+			<div class="cont-container">
+				<div class="cont-card">
+					<div class="img-header" style={`background: url("${callDB[0].thumbnail}");`}></div>
+					<div class="card-body">
+						<div class="card-title">
+							{callDB[0].mHeader}
+						</div>
+						<div class="card-desp">
+							{callDB[0].header}
+						</div>
+						<div class="card-footer">
+							<button class="card-button">
+								Read More..
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="cont-card">
+					<div class="img-header" style={`background: url("${callDB[1].thumbnail}");`}></div>
+					<div class="card-body">
+						<div class="card-title">
+							{callDB[1].mHeader}
+						</div>
+						<div class="card-desp">
+							{callDB[1].header}
+						</div>
+						<div class="card-footer">
+							<button class="card-button">
+								Read More..
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="cont-card">
+					<div class="img-header" style={`background: url("${callDB[2].thumbnail}");`}></div>
+					<div class="card-body">
+						<div class="card-title">
+							{callDB[2].mHeader}
+						</div>
+						<div class="card-desp">
+							{callDB[2].header}
+						</div>
+						<div class="card-footer">
+							<button class="card-button">
+								Read More..
+							</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="cont-card">
+					<div class="img-header" style={`background: url("${callDB[3].thumbnail}");`}></div>
+					<div class="card-body">
+						<div class="card-title">
+							{callDB[3].mHeader}
+						</div>
+						<div class="card-desp">
+							{callDB[3].header}
+						</div>
+						<div class="card-footer">
+							<button class="card-button">
+								Read More..
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		{/await}
 	</div>
 </section>
 
@@ -75,12 +159,89 @@
 		text-decoration: none;
 	}
 
+	.content {
+		color: whitesmoke;
+		width: 80%;
+
+		margin-left: auto;
+		margin-right: auto;
+
+		padding-bottom: 1rem;
+	}
+
+	.cont-container {
+		display: flex;
+		gap: 1rem;
+		justify-content: center;
+
+		flex-wrap: wrap;
+	}
+
+	.cont-container .cont-card {
+		background-color: whitesmoke;
+		color: #2e2f2f;
+		border-radius: 1rem;
+		width: 18rem;
+	}
+
+	.cont-card .img-header {
+		width: 100% !important;
+		height: 8rem !important;
+		border-top-left-radius: 1rem;
+		border-top-right-radius: 1rem;
+
+		background-position: center !important;
+		background-repeat: no-repeat !important;
+		background-size: cover !important;
+	}
+
+	.cont-card .card-body {
+		width: 16rem;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.cont-card .card-body .card-title {
+		width: 100%;
+		text-align: center;
+		font-size: larger;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+	}
+
+	.cont-card .card-body .card-desp {
+		width: 100%;
+		text-align: center;
+		font-size: medium;
+		color: grey;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+	}
+
+	.cont-card .card-body .card-footer {
+		width: 100%;
+		text-align: right;
+		padding-top: .5rem;
+		padding-bottom: .5rem;
+	}
+
+	.cont-card .card-body .card-footer .card-button {
+		text-align: right;
+		font-size: medium;
+		background-color: coral;
+		color: whitesmoke;
+
+		border: none;
+		padding: 1rem;
+		border-radius: 1rem;
+	}
+
 	@media only screen and (max-width: 600px) {
 		.desp {
-			width: 100%;
+			width: auto;
 
-			padding-left: 1rem;
-			padding-right: 1rem;
+			margin-left: 1rem;
+			margin-right: 1rem;
 		}
 	}
 </style>
